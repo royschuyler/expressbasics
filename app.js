@@ -1,14 +1,21 @@
 var express = require('express');
 var app = express();
 
-app.use(express.static('public'));
+app.set('view engine', 'ejs');
 
-app.get('/test', function (req, res) {
-  res.send('Hello World!');
-});
+// app.use(function (req, res, next) {
+//   console.log('Request at ', new Date().toString());
+//   next();
+// }
+
+app.use(express.static('public'));
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
+});
+
+app.get('/test', function (req, res) {
+  res.send('Test1!');
 });
 
 app.post('/', function (req, res) {
@@ -19,11 +26,45 @@ app.get(/hello/, function (req, res) {
   res.send('Hello!');
 });
 
-app.get('/world', function (req, res) {
-  res.send('World!');
+app.get('/awesomethings', function (req, res) {
+
+  var awesomeThings = ['Pizza', 'Bacon', 'Pluto'];
+  res.render('templates/world',
+    { title: 'Its A Title',
+    welcome: 'Welcome to my app',
+    awesomeThings: awesomeThings});
 });
 
-app.use(express.static('public'));
+
+
+app.get('/json', function (req, res) {
+  res.send({Hello: 'World!'});
+});
+
+app.get('/thisshoulderror', function (req, res) {
+  res.send(badVariable);
+});
+
+app.use(function (req, res) {
+  res.status(403);
+  res.send('Unauthorized!');
+});
+
+app.use(function (err, req, res, next) {
+  console.log('ERROR!', err.stack);
+  res.status(500).send('My Bad');
+});
+
+app.use(function (req, res, next) {
+  console.log('Request at ', new Date().toString());
+  res.status(500).send('My Bad');
+  next();
+});
+
+
+
+
+
 
 
 
