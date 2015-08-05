@@ -1,17 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-
-
-
 router.get('/', function (req, res) {
   res.send('Hello World!');
-});
-
-
-
-router.get('/test', function (req, res) {
-  res.send('Test1!');
 });
 
 router.get(/hello/, function (req, res) {
@@ -19,15 +10,35 @@ router.get(/hello/, function (req, res) {
 });
 
 router.get('/awesomethings', function (req, res) {
-  var awesomeThings = ['Pizza', 'Bacon', 'Pluto'];
-  res.render('templates/world',
-    { title: 'Its A Title',
-    welcome: 'Welcome to my app',
-    awesomeThings: awesomeThings});
+  setTimeout(function () {
+    var awesomeThings = [
+      'Pizza',
+      'Bacon',
+      '2nd Ammendment',
+      'Pluto',
+      'Space Jam'
+    ];
+
+    res.render('templates/world',
+      {
+        welcome: 'Thanks for coming!',
+        awesomeThings: awesomeThings
+      }
+    );
+  }, 5000);
+});
+
+router.get('/test', function (req, res, next) {
+  res.write('Test1!');
+  next();
+});
+
+router.get('/test', function (req, res) {
+  res.end('Test2!');
 });
 
 router.get('/json', function (req, res) {
-  res.send({Hello: 'World!'});
+  res.send({an: 'object'});
 });
 
 router.get('/thisshoulderror', function (req, res) {
