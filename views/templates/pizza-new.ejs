@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %> | Pizza | New Order</title>
+</head>
+<body>
+  <h1>World Famous Pizza">Cancel</h1>
+  <a href="/pizza">Cancel</a>
+  <form action="/pizza/order" method="POST">
+    Name: <input name="name" type="text" placeholder="Name">
+    Style:
+    <select name="topping">
+      <option value="pepperoni">Pepperoni</option>
+      <option value="sausage">Sausage</option>
+      <option value="onion">Onion</option>
+      <option value="peppers">Peppers</option>
+    </select>
+    Qty: <input name="qty" type="number" min="1" value="6">
+    <input type="submit" value="Order me some pizza">
+  </form>
+</body>
+</html>
